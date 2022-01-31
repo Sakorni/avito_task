@@ -1,8 +1,16 @@
 package server
 
-import "github.com/gin-gonic/gin"
+import (
+	"avito_task/service"
+	"github.com/gin-gonic/gin"
+)
 
 type Handler struct {
+	service *service.BalanceService
+}
+
+func NewHandler(service *service.BalanceService) *Handler {
+	return &Handler{service: service}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
