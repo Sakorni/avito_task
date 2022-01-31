@@ -1,4 +1,4 @@
-module avito_test
+module avito_task
 
 go 1.17
 
