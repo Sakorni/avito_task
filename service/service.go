@@ -16,10 +16,10 @@ func NewBalanceService(repo *repository.BalanceRepository) *BalanceService {
 }
 
 // ChangeAmount Used for withdraw and deposit operations
-func (b *BalanceService) ChangeAmount(id uint, amount int) (models.BalanceInfo, error) {
-	return models.BalanceInfo{}, nil
+func (b *BalanceService) ChangeAmount(id uint, amount int) (*models.BalanceInfo, error) {
+	return b.repo.ChangeAmount(id, amount)
 }
 
-func (b *BalanceService) Transfer(transaction models.Transaction) (error error) {
-	return nil
+func (b *BalanceService) Transfer(transaction *models.Transaction) (error error) {
+	return b.repo.Transfer(transaction)
 }
