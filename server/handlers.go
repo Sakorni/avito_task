@@ -20,7 +20,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		group.POST("/withdraw", h.withdraw)
 		group.POST("/deposit", h.deposit)
 		group.POST("/transfer", h.transfer)
-		group.GET("/", h.getInfo)
+		group.GET("/:id", h.getInfo)
 	}
 	return core
 }
