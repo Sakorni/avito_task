@@ -1,11 +1,13 @@
 package models
 
-import "github.com/golang/protobuf/ptypes/timestamp"
+import (
+	"time"
+)
 
 type Transaction struct {
-	Id        uint                `json:"id"`
-	From      uint                `json:"from_id"`
-	To        uint                `json:"to_id"`
-	Amount    int                 `json:"amount"`
-	CreatedAt timestamp.Timestamp `json:"created_at"`
+	Id        uint      `json:"id"`
+	From      uint      `json:"from_id" `
+	To        uint      `json:"to_id"`
+	Amount    int       `json:"amount" `
+	CreatedAt time.Time `json:"created_at"`
 }

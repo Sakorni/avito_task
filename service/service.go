@@ -23,3 +23,7 @@ func (b *BalanceService) ChangeAmount(id uint, amount int) (*models.BalanceInfo,
 func (b *BalanceService) Transfer(transaction *models.Transaction) (error error) {
 	return b.repo.Transfer(transaction)
 }
+
+func (b *BalanceService) GetBalance(userId uint) (*models.BalanceInfo, error) {
+	return b.repo.GetBalance(userId)
+}

@@ -28,22 +28,26 @@ func (b *BalanceRepository) ChangeAmount(id uint, amount int) (info *models.Bala
 
 	info, err = b.getBalance(tx, id)
 	if err != nil {
-		// not(err == SuchUser && amount > 0)
 		if err != errors.NoSuchUser || amount < 0 {
 			return
 		}
 		info, err = b.createBalance(tx, id)
+		if err != nil {
+			return
+		}
 	}
+
 	info.Balance += amount
 	if info.Balance < 0 {
 		return nil, errors.NotEnoughMoney
 	}
-	//On that moment we know, that everything is correct. User exists and have money for that transaction
+
 	err = b.createTransaction(tx, &models.Transaction{
 		From:   id,
 		To:     id,
 		Amount: amount,
 	})
+
 	if err != nil {
 		return
 	}
@@ -126,14 +130,16 @@ func (b *BalanceRepository) getBalance(tx *sql.Tx, id uint) (*models.BalanceInfo
 	if err != nil {
 		return nil, err
 	}
+	defer query.Close()
 	res := &models.BalanceInfo{}
 	if !query.Next() {
 		return nil, errors.NoSuchUser
 	}
-	err = query.Scan(&res.Id, &res.UserId, &res.Balance, &res.CreatedAt, res.UpdatedAt)
+	err = query.Scan(&res.Id, &res.UserId, &res.Balance, &res.CreatedAt, &res.UpdatedAt)
 	if err != nil {
 		return nil, err
 	}
+
 	return res, nil
 }
 
