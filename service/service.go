@@ -5,6 +5,8 @@ import (
 	"avito_task/repository"
 )
 
+const DefaultCurrency = "RUB"
+
 type BalanceService struct {
 	repo *repository.BalanceRepository
 }

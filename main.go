@@ -26,7 +26,7 @@ func main() {
 	}
 	rep := repository.NewBalanceRepository(db)
 	service := service.NewBalanceService(rep)
-	handler := server.NewHandler(service)
+	handler := server.NewHandler(service, os.Getenv("CURRENCY_API_KEY"))
 	engine := handler.InitRoutes()
 	logrus.Fatalf("%v", engine.Run(os.Getenv("AVITO_PORT")))
 }

@@ -7,10 +7,11 @@ import (
 
 type Handler struct {
 	service *service.BalanceService
+	apiKey  string
 }
 
-func NewHandler(service *service.BalanceService) *Handler {
-	return &Handler{service: service}
+func NewHandler(service *service.BalanceService, apiKey string) *Handler {
+	return &Handler{service: service, apiKey: apiKey}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
